@@ -1,0 +1,75 @@
+
+.container {
+  max-width: 400px;
+  margin: 40px auto; /* 40px em cima/baixo, automático nos lados (centraliza) */
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+/* O Título */
+.titulo {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* O Formulário (Flexbox para alinhar um embaixo do outro) */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
+
+/* Estilo comum para Inputs e Textarea */
+.campo {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Efeito quando clica no campo */
+.campo:focus {
+  outline: none;
+  border-color: #28a745; 
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+/* O Botão de Enviar */
+.btn-enviar {
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s; 
+}
+
+.btn-enviar:hover {
+  background-color: #218838;
+}
+
+/* Mensagens de Status */
+.status {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.sucesso {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.erro {
+  background-color: #f8d7da;
+  color: #721c24;
+}

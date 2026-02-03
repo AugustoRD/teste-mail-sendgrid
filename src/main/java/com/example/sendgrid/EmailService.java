@@ -18,10 +18,10 @@ public class EmailService {
             SimpleMailMessage message = new SimpleMailMessage();
             
             //QUEM ENVIA (Obrigatório ser o verificado no SendGrid)
-            message.setFrom("ColoqueSeuEmailAqui@gmail.com"); 
+            message.setFrom("seu-email-verificado@gmail.com"); 
             
             //QUEM RECEBE 
-            message.setTo("EmailDeDestino@gmail.com"); 
+            message.setTo("seu-email-destino@gmail.com"); 
             
             // Reply-To:
             message.setReplyTo(dadosFormulario.emailVisitante());
