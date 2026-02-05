@@ -18,67 +18,101 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class EmailService {
 
-    // Mantemos a segurança: A chave vem do arquivo secrets.properties
     @Value("${spring.mail.password}")
     private String sendGridApiKey;
 
-    // Caminho do template que criamos
-    private final String TEMPLATE_PATH = "templates/email-visita.html";
+    // Defina seu e-mail principal aqui 
+    // Esse e-mail será o remetente oficial e quem recebe os avisos
+    private final String EMAIL_CENTRAL = "emailCadastrado@email.com";
 
-    public void sendVisitRequest(EmailDTO dadosFormulario) {
+    // Caminhos dos templates na pasta resources
+    private final String TEMPLATE_ADMIN = "templates/email-visita.html";
+    private final String TEMPLATE_CLIENTE = "templates/email-confirmacao.html";
+
+    // --- MÉTODO PRINCIPAL ---
+    public void sendVisitRequest(EmailDTO dados) {
         try {
-            // 1. Quem envia (SEU e-mail verificado no SendGrid)
-            Email from = new Email("emailOrigem@gmail.com", "Sistema de Visitas");
-            
-            // 2. Quem recebe (Você mesmo / A Central)
-            Email to = new Email("emailDestino@gmail.com"); 
+            //Envia o aviso para Admin
+            enviarParaAdmin(dados);
 
-            // 3. Lê o HTML e substitui os dados
-            String htmlTemplate = readTemplate(TEMPLATE_PATH);
-            String htmlPronto = replacePlaceholders(htmlTemplate, dadosFormulario);
+            //Envia a confirmação para o visitante 
+            enviarParaVisitante(dados);
 
-            // 4. Monta o e-mail
-            Content content = new Content("text/html", htmlPronto);
-            String assunto = "🌱 Nova Solicitação: " + dadosFormulario.nomeVisitante();
-            
-            Mail mail = new Mail(from, assunto, to, content);
-            
-            // Configura para que o botão "Responder" vá para o visitante
-            mail.setReplyTo(new Email(dadosFormulario.emailVisitante()));
-
-            // 5. Envia via API
-            SendGrid sg = new SendGrid(sendGridApiKey);
-            Request request = new Request();
-
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            
-            Response response = sg.api(request);
-            
-            if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
-                System.out.println("✅ E-mail com Template Local enviado com sucesso!");
-            } else {
-                System.err.println("❌ Erro SendGrid: " + response.getBody());
-            }
+            System.out.println("✅ Ciclo de e-mails concluído com sucesso!");
 
         } catch (IOException ex) {
-            throw new RuntimeException("Erro ao processar template ou enviar e-mail", ex);
+            System.err.println("Erro crítico ao enviar e-mails: " + ex.getMessage());
+            throw new RuntimeException("Falha no envio de e-mails", ex);
         }
     }
 
-    // Função Auxiliar 1: Lê o arquivo da pasta resources
-    private String readTemplate(String path) throws IOException {
-        ClassPathResource resource = new ClassPathResource(path);
-        // Lê os bytes e transforma em String UTF-8 (para aceitar acentos)
-        return new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+    // --- MÉTODOS AUXILIARES  ---
+
+    private void enviarParaAdmin(EmailDTO dados) throws IOException {
+        // Prepara o HTML do Admin
+        String html = readTemplate(TEMPLATE_ADMIN);
+        html = html.replace("{{nome}}", dados.nomeVisitante())
+                   .replace("{{email}}", dados.emailVisitante())
+                   .replace("{{mensagem}}", dados.mensagem());
+
+        // De: Central -> Para: Central
+        // Se a Central clicar em "Responder", vai para o e-mail do VISITANTE
+        sendEmailFinal(
+            EMAIL_CENTRAL, 
+            "🌱 Nova Solicitação: " + dados.nomeVisitante(), 
+            html, 
+            dados.emailVisitante() 
+        );
     }
 
-    // Função Auxiliar 2: Troca os {{ }} pelos dados reais
-    private String replacePlaceholders(String template, EmailDTO dados) {
-        return template
-                .replace("{{nome}}", dados.nomeVisitante())
-                .replace("{{email}}", dados.emailVisitante())
-                .replace("{{mensagem}}", dados.mensagem());
+    private void enviarParaVisitante(EmailDTO dados) throws IOException {
+        // Prepara o HTML do Cliente
+        String html = readTemplate(TEMPLATE_CLIENTE);
+        // O template de confirmação geralmente só usa o nome, mas por garantia substituímos tudo
+        html = html.replace("{{nome}}", dados.nomeVisitante());
+
+        // De: Central -> Para: Visitante
+        // Se o Visitante clicar em "Responder", vai para o e-mail da CENTRAL
+        sendEmailFinal(
+            dados.emailVisitante(), 
+            "Recebemos sua solicitação! 🌱", 
+            html, 
+            EMAIL_CENTRAL 
+        );
+    }
+
+    // --- MÉTODO GENÉRICO (Conexão com SendGrid) ---
+    // Esse método faz o trabalho de conectar na API, servindo para qualquer envio.
+    private void sendEmailFinal(String destinatario, String assunto, String htmlContent, String replyToEmail) throws IOException {
+        Email from = new Email(EMAIL_CENTRAL, "Sistema de Visitas");
+        Email to = new Email(destinatario);
+        Content content = new Content("text/html", htmlContent);
+
+        Mail mail = new Mail(from, assunto, to, content);
+        
+        // Configura o Reply-To (quem recebe a resposta)
+        if (replyToEmail != null && !replyToEmail.isEmpty()) {
+            mail.setReplyTo(new Email(replyToEmail));
+        }
+
+        SendGrid sg = new SendGrid(sendGridApiKey);
+        Request request = new Request();
+        request.setMethod(Method.POST);
+        request.setEndpoint("mail/send");
+        request.setBody(mail.build());
+        
+        Response response = sg.api(request);
+        
+        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            System.out.println("📤 E-mail enviado para: " + destinatario);
+        } else {
+            System.err.println("❌ Erro SendGrid para " + destinatario + ": " + response.getBody());
+        }
+    }
+
+    // Leitura do arquivo 
+    private String readTemplate(String path) throws IOException {
+        ClassPathResource resource = new ClassPathResource(path);
+        return new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
     }
 }
