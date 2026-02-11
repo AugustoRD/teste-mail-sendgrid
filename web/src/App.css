@@ -1,0 +1,106 @@
+
+/* Container Central */
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #FFFFFF; 
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 102, 179, 0.15); 
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 5px solid #0066B3; 
+}
+
+h2 { 
+  color: #0066B3; 
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+/* Inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #6DCFF6; 
+  outline: none;
+  box-shadow: 0 0 5px rgba(109, 207, 246, 0.4); 
+}
+
+label { 
+  font-weight: 600; 
+  font-size: 12px; 
+  color: #0066B3; 
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+/* Flexbox */
+.row { display: flex; gap: 15px; }
+.col { flex: 1; }
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  background: #f4f9fd; 
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e1eff8;
+}
+
+/* Botão */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0066B3; 
+  color: #FFFFFF; 
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+button:hover { 
+  background-color: #6DCFF6; 
+  color: #0066B3; 
+}
+
+button:disabled { 
+  background-color: #ccc; 
+  color: #fff;
+  cursor: not-allowed; 
+}
+
+/* Mensagens */
+.error-msg { 
+  color: #d32f2f; 
+  font-size: 13px; 
+  margin-bottom: 15px; 
+  text-align: center; 
+  background: #fadbd8; 
+  padding: 8px; 
+  border-radius: 4px;
+}
+
+.success-msg { 
+  color: #0066B3; 
+  background-color: #e6f4fc;
+  border: 1px solid #6DCFF6; 
+  text-align: center; 
+  font-weight: bold; 
+  margin-bottom: 15px; 
+  padding: 10px;
+  border-radius: 4px;
+}

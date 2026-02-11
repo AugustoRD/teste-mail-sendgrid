@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Solicitação de Visita</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        
+        .card { background-color: #FFFFFF; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 8px; border-left: 5px solid #0066B3; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { color: #0066B3; margin-top: 0; }
+        .info-group { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .label { font-weight: bold; color: #555; display: block; font-size: 0.9em; }
+        .value { color: #333; font-size: 1.1em; }
+        
+        .alert { background-color: #f0fbff; color: #0066B3; padding: 10px; border-radius: 4px; font-size: 0.9em; margin-top: 20px; border: 1px solid #6DCFF6; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🌱 Nova Solicitação: Central de Sustentabilidade</h2>
+        <p>Olá, uma nova instituição deseja agendar uma visita.</p>
+
+        <div class="info-group">
+            <span class="label">Instituição:</span>
+            <span class="value">{{instituicao}}</span>
+        </div>
+
+        <div class="info-group">
+            <span class="label">Responsável:</span>
+            <span class="value">{{nome}}</span>
+        </div>
+
+        <div class="info-group">
+            <span class="label">Contato (E-mail):</span>
+            <span class="value">{{email}}</span>
+        </div>
+
+        <div class="info-group">
+            <span class="label">Data Solicitada:</span>
+            <span class="value">{{data}}</span>
+        </div>
+
+        <div class="info-group">
+            <span class="label">Horário:</span>
+            <span class="value">{{horario}}</span>
+        </div>
+
+        <div class="info-group">
+            <span class="label">Grupo:</span>
+            <span class="value">{{tipoGrupo}} ({{qtd}} participantes)</span>
+        </div>
+
+        <div class="info-group">
+            <span class="label">Observações / Justificativa:</span>
+            <p class="value">{{mensagem}}</p>
+        </div>
+
+        <div class="alert">
+            ⚠️ <strong>Validação:</strong> Verifique se a data cai em Terça, Quarta ou Quinta e se o grupo não excede o limite.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recebemos sua Solicitação</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f9f9f9; padding: 20px; }
+        
+        .container { background-color: #FFFFFF; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 8px; text-align: center; border-top: 4px solid #0066B3; }
+        h2 { color: #0066B3; }
+        p { color: #555; line-height: 1.5; }
+        
+        .highlight { background-color: #f0fbff; padding: 10px; border-radius: 4px; font-weight: bold; color: #0066B3; border: 1px solid #6DCFF6; margin: 10px 0; }
+        .footer { margin-top: 20px; font-size: 12px; color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Olá, {{nome}}! 👋</h2>
+        <p>Recebemos sua solicitação de visita à <strong>Central de Sustentabilidade da PUCRS</strong>.</p>
+        
+        <p>Registramos seu interesse para o dia:</p>
+        <div class="highlight">{{data}}</div>
+        
+        <p>Nossa equipe irá analisar a disponibilidade na agenda e entrará em contato em breve através deste e-mail para confirmar o agendamento.</p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        
+        <p class="footer">Núcleo de Sustentabilidade<br>Este é um e-mail automático.</p>
+    </div>
+</body>
+</html>
