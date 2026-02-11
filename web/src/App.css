@@ -1,75 +1,106 @@
 
-.container {
-  max-width: 400px;
-  margin: 40px auto; /* 40px em cima/baixo, automático nos lados (centraliza) */
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+/* Container Central */
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #FFFFFF; 
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 102, 179, 0.15); 
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 5px solid #0066B3; 
 }
 
-/* O Título */
-.titulo {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+h2 { 
+  color: #0066B3; 
+  text-align: center; 
+  margin-bottom: 20px; 
 }
 
-/* O Formulário (Flexbox para alinhar um embaixo do outro) */
-.formulario {
-  display: flex;
-  flex-direction: column;
-  gap: 15px; 
-}
-
-/* Estilo comum para Inputs e Textarea */
-.campo {
+/* Inputs */
+input, select, textarea {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Efeito quando clica no campo */
-.campo:focus {
+input:focus, select:focus, textarea:focus {
+  border-color: #6DCFF6; 
   outline: none;
-  border-color: #28a745; 
-  box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+  box-shadow: 0 0 5px rgba(109, 207, 246, 0.4); 
 }
 
-/* O Botão de Enviar */
-.btn-enviar {
+label { 
+  font-weight: 600; 
+  font-size: 12px; 
+  color: #0066B3; 
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+/* Flexbox */
+.row { display: flex; gap: 15px; }
+.col { flex: 1; }
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  background: #f4f9fd; 
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e1eff8;
+}
+
+/* Botão */
+button {
+  width: 100%;
   padding: 12px;
-  background-color: #28a745;
-  color: white;
+  background-color: #0066B3; 
+  color: #FFFFFF; 
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s; 
+  transition: background 0.3s, color 0.3s;
 }
 
-.btn-enviar:hover {
-  background-color: #218838;
+button:hover { 
+  background-color: #6DCFF6; 
+  color: #0066B3; 
 }
 
-/* Mensagens de Status */
-.status {
-  margin-top: 15px;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px;
+button:disabled { 
+  background-color: #ccc; 
+  color: #fff;
+  cursor: not-allowed; 
+}
+
+/* Mensagens */
+.error-msg { 
+  color: #d32f2f; 
+  font-size: 13px; 
+  margin-bottom: 15px; 
+  text-align: center; 
+  background: #fadbd8; 
+  padding: 8px; 
   border-radius: 4px;
 }
 
-.sucesso {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.erro {
-  background-color: #f8d7da;
-  color: #721c24;
+.success-msg { 
+  color: #0066B3; 
+  background-color: #e6f4fc;
+  border: 1px solid #6DCFF6; 
+  text-align: center; 
+  font-weight: bold; 
+  margin-bottom: 15px; 
+  padding: 10px;
+  border-radius: 4px;
 }

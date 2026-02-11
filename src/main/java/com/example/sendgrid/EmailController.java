@@ -15,7 +15,10 @@ public class EmailController {
 
     @PostMapping("/solicitar-visita")
     public String solicitarVisita(@RequestBody EmailDTO formulario) {
+        System.out.println("📩 Recebendo solicitação de: " + formulario.instituicao());
+        
         emailService.sendVisitRequest(formulario);
-        return "Sua solicitação foi recebida! Verifique se o e-mail chegou.";
+        
+        return "Solicitação enviada com sucesso! Verifique seu e-mail.";
     }
 }

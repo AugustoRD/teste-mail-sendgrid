@@ -4,36 +4,29 @@
     <meta charset="UTF-8">
     <title>Recebemos sua Solicitação</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; background-color: #f4f4f4; margin: 0; padding: 0; }
-        .container { max-width: 600px; margin: 30px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .header { background-color: #28a745; color: white; padding: 20px; text-align: center; }
-        .content { padding: 30px; }
-        .box-info { background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #28a745; }
-        .footer { background-color: #f9f9f9; padding: 15px; text-align: center; font-size: 12px; color: #888; }
+        body { font-family: sans-serif; background-color: #f9f9f9; padding: 20px; }
+        
+        .container { background-color: #FFFFFF; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 8px; text-align: center; border-top: 4px solid #0066B3; }
+        h2 { color: #0066B3; }
+        p { color: #555; line-height: 1.5; }
+        
+        .highlight { background-color: #f0fbff; padding: 10px; border-radius: 4px; font-weight: bold; color: #0066B3; border: 1px solid #6DCFF6; margin: 10px 0; }
+        .footer { margin-top: 20px; font-size: 12px; color: #aaa; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🌱 Solicitação Recebida!</h1>
-        </div>
-        <div class="content">
-            <p>Olá, <strong>{{nome}}</strong>!</p>
-            
-            <p>Obrigado pelo seu interesse em nos visitar. Este e-mail é para confirmar que recebemos seus dados com sucesso.</p>
-            
-            <div class="box-info">
-                <strong>Próximos Passos:</strong><br>
-                Nossa equipe irá analisar a disponibilidade e entrará em contato em breve para confirmar o agendamento.
-            </div>
-
-            <p>Se precisar adicionar alguma informação urgente, basta responder a este e-mail.</p>
-            
-            <p>Atenciosamente,<br><strong>Equipe do Sistema de Visitas</strong></p>
-        </div>
-        <div class="footer">
-            <p>Não é necessário responder este e-mail automático.</p>
-        </div>
+        <h2>Olá, {{nome}}! 👋</h2>
+        <p>Recebemos sua solicitação de visita à <strong>Central de Sustentabilidade da PUCRS</strong>.</p>
+        
+        <p>Registramos seu interesse para o dia:</p>
+        <div class="highlight">{{data}}</div>
+        
+        <p>Nossa equipe irá analisar a disponibilidade na agenda e entrará em contato em breve através deste e-mail para confirmar o agendamento.</p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        
+        <p class="footer">Núcleo de Sustentabilidade<br>Este é um e-mail automático.</p>
     </div>
 </body>
 </html>

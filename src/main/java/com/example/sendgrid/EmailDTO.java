@@ -1,5 +1,12 @@
 package com.example.sendgrid;
 
-// O DTO representa o formulário que o visitante preencheu
-public record EmailDTO(String nomeVisitante, String emailVisitante, String mensagem) {
-}
+public record EmailDTO(
+    String nomeResponsavel, 
+    String emailContato,    
+    String instituicao,     
+    String dataVisita,      
+    String horarioVisita,   
+    String tipoGrupo,       //(Adultos/Crianças)
+    Integer qtdPessoas,     
+    String mensagem         // Justificativa ou observação
+) {}
