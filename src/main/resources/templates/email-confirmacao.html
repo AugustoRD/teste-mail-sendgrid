@@ -3,30 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Recebemos sua Solicitação</title>
-    <style>
-        body { font-family: sans-serif; background-color: #f9f9f9; padding: 20px; }
-        
-        .container { background-color: #FFFFFF; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 8px; text-align: center; border-top: 4px solid #0066B3; }
-        h2 { color: #0066B3; }
-        p { color: #555; line-height: 1.5; }
-        
-        .highlight { background-color: #f0fbff; padding: 10px; border-radius: 4px; font-weight: bold; color: #0066B3; border: 1px solid #6DCFF6; margin: 10px 0; }
-        .footer { margin-top: 20px; font-size: 12px; color: #aaa; }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <h2>Olá, {{nome}}! 👋</h2>
-        <p>Recebemos sua solicitação de visita à <strong>Central de Sustentabilidade da PUCRS</strong>.</p>
-        
-        <p>Registramos seu interesse para o dia:</p>
-        <div class="highlight">{{data}}</div>
-        
-        <p>Nossa equipe irá analisar a disponibilidade na agenda e entrará em contato em breve através deste e-mail para confirmar o agendamento.</p>
-        
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-        
-        <p class="footer">Núcleo de Sustentabilidade<br>Este é um e-mail automático.</p>
-    </div>
+<body style="margin: 0; padding: 0; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+    
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f9f9f9; padding: 30px 15px;">
+        <tr>
+            <td align="center">
+                
+                <table width="500" cellpadding="0" cellspacing="0" border="0" style="background-color: #FFFFFF; border-radius: 8px; border-top: 4px solid #0066B3; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden;">
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            
+                            <h2 style="color: #0066B3; margin-top: 0; margin-bottom: 15px; font-size: 24px;">Olá, {{nome}}! 👋</h2>
+                            
+                            <p style="color: #555555; line-height: 1.6; font-size: 16px; margin-bottom: 20px; margin-top: 0;">
+                                Recebemos sua solicitação de visita à <strong style="color: #333333;">Central de Resíduos da PUCRS</strong>.
+                            </p>
+                            
+                            <p style="color: #555555; line-height: 1.6; font-size: 16px; margin-bottom: 15px; margin-top: 0;">
+                                Registramos seu interesse para:
+                            </p>
+                            
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 25px;">
+                                <tr>
+                                    <td align="center">
+                                        <table cellpadding="0" cellspacing="0" border="0" style="background-color: #f0fbff; border: 1px solid #6DCFF6; border-radius: 6px;">
+                                            <tr>
+                                                <td style="padding: 15px 30px; text-align: center;">
+                                                    <span style="display: block; font-weight: bold; color: #0066B3; font-size: 20px; margin-bottom: 5px;">
+                                                         {{data}}
+                                                    </span>
+                                                    <span style="display: block; color: #555555; font-size: 15px;">
+                                                         {{horario}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="color: #555555; line-height: 1.6; font-size: 16px; margin-bottom: 30px; margin-top: 0;">
+                                Nossa equipe irá analisar a disponibilidade na agenda e entrará em contato em breve através deste e-mail para confirmar o agendamento.
+                            </p>
+                            
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="border-top: 1px solid #eeeeee; padding-top: 20px;">
+                                        <p style="margin: 0; font-size: 12px; color: #aaaaaa; line-height: 1.5;">
+                                            Núcleo de Sustentabilidade<br>
+                                            Este é um e-mail automático.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+                </td>
+        </tr>
+    </table>
 </body>
 </html>

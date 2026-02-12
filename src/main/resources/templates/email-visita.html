@@ -3,61 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Nova Solicitação de Visita</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; padding: 20px; }
-        
-        .card { background-color: #FFFFFF; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 8px; border-left: 5px solid #0066B3; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { color: #0066B3; margin-top: 0; }
-        .info-group { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .label { font-weight: bold; color: #555; display: block; font-size: 0.9em; }
-        .value { color: #333; font-size: 1.1em; }
-        
-        .alert { background-color: #f0fbff; color: #0066B3; padding: 10px; border-radius: 4px; font-size: 0.9em; margin-top: 20px; border: 1px solid #6DCFF6; }
-    </style>
 </head>
-<body>
-    <div class="card">
-        <h2>🌱 Nova Solicitação: Central de Sustentabilidade</h2>
-        <p>Olá, uma nova instituição deseja agendar uma visita.</p>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+    
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; padding: 20px;">
+        <tr>
+            <td align="center">
+                
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 8px; border-left: 5px solid #0066B3; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden;">
+                    <tr>
+                        <td style="padding: 30px;">
+                            
+                            <h2 style="color: #0066B3; margin-top: 0; margin-bottom: 20px; font-size: 22px;">🌱 Nova Solicitação de Visita: Central de Resíduos</h2>
+                            <p style="color: #555555; font-size: 15px; margin-bottom: 25px;">Olá, uma nova instituição deseja agendar uma visita.</p>
 
-        <div class="info-group">
-            <span class="label">Instituição:</span>
-            <span class="value">{{instituicao}}</span>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px; border-bottom: 1px solid #eeeeee; padding-bottom: 10px;">
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Instituição:</span>
+                                        <span style="color: #333333; font-size: 16px;">{{instituicao}}</span>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="info-group">
-            <span class="label">Responsável:</span>
-            <span class="value">{{nome}}</span>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px; border-bottom: 1px solid #eeeeee; padding-bottom: 10px;">
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Responsável:</span>
+                                        <span style="color: #333333; font-size: 16px;">{{nome}}</span>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="info-group">
-            <span class="label">Contato (E-mail):</span>
-            <span class="value">{{email}}</span>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px; border-bottom: 1px solid #eeeeee; padding-bottom: 10px;">
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Contato (E-mail):</span>
+                                        <span style="color: #333333; font-size: 16px;">{{email}}</span>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="info-group">
-            <span class="label">Data Solicitada:</span>
-            <span class="value">{{data}}</span>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px; border-bottom: 1px solid #eeeeee; padding-bottom: 10px;">
+                                <tr>
+                                    <td width="50%">
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Data Solicitada:</span>
+                                        <span style="color: #333333; font-size: 16px;">{{data}}</span>
+                                    </td>
+                                    <td width="50%">
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Horário:</span>
+                                        <span style="color: #333333; font-size: 16px;">{{horario}}</span>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="info-group">
-            <span class="label">Horário:</span>
-            <span class="value">{{horario}}</span>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px; border-bottom: 1px solid #eeeeee; padding-bottom: 10px;">
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Grupo:</span>
+                                        <span style="color: #333333; font-size: 16px;">{{tipoGrupo}} ({{qtd}} participantes)</span>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="info-group">
-            <span class="label">Grupo:</span>
-            <span class="value">{{tipoGrupo}} ({{qtd}} participantes)</span>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 25px;">
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold; color: #555555; display: block; font-size: 13px;">Observações / Justificativa:</span>
+                                        <p style="color: #333333; font-size: 15px; margin-top: 5px;">{{mensagem}}</p>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="info-group">
-            <span class="label">Observações / Justificativa:</span>
-            <p class="value">{{mensagem}}</p>
-        </div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f0fbff; border: 1px solid #6DCFF6; border-radius: 4px;">
+                                <tr>
+                                    <td style="padding: 12px; color: #0066B3; font-size: 14px; text-align: center;">
+                                        ⚠️ <strong>Próximo Passo:</strong> Verifique a disponibilidade na agenda interna e entre em contato com o solicitante para confirmar ou reagendar a visita.
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="alert">
-            ⚠️ <strong>Validação:</strong> Verifique se a data cai em Terça, Quarta ou Quinta e se o grupo não excede o limite.
-        </div>
-    </div>
+                        </td>
+                    </tr>
+                </table>
+                
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

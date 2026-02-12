@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class EmailService {
@@ -21,10 +23,10 @@ public class EmailService {
     private String sendGridApiKey;
 
     // QUEM ENVIA: Use o Email verificado no SendGrid 
-    private final String EMAIL_REMETENTE_OFICIAL = "remetente@email.com";
+    private final String EMAIL_REMETENTE_OFICIAL = "augusto06r@gmail.com";
 
     // QUEM RECEBE: Sua caixa de entrada 
-    private final String EMAIL_DESTINO_ADMIN = "destino@email.com";
+    private final String EMAIL_DESTINO_ADMIN = "augusto06r@gmail.com";
 
     // Caminhos dos templates
     private final String TEMPLATE_ADMIN = "templates/email-visita.html";
@@ -33,10 +35,10 @@ public class EmailService {
     // --- MÉTODO PRINCIPAL ---
     public void sendVisitRequest(EmailDTO dados) {
         try {
-            // Envia para a Central com todos os detalhes
+            // Envia para a Central 
             enviarParaAdmin(dados);
 
-            // Envia confirmação para o Solicitante
+            // Envia confirmação para o Solicitante 
             enviarParaVisitante(dados);
 
             System.out.println("✅ Ciclo de e-mails concluído com sucesso!");
@@ -47,23 +49,23 @@ public class EmailService {
         }
     }
 
-    // --- MÉTODOS AUXILIARES ---
+    // --- MÉTODOS AUXILIARES DE ENVIO ---
 
     private void enviarParaAdmin(EmailDTO dados) throws IOException {
         String html = readTemplate(TEMPLATE_ADMIN);
         
-        // Substitui os novos campos no HTML
+        // Formata a data antes de colocar no HTML
+        String dataFormatada = formatarData(dados.dataVisita());
+
         html = html.replace("{{nome}}", dados.nomeResponsavel())
                    .replace("{{email}}", dados.emailContato())
                    .replace("{{instituicao}}", dados.instituicao())
-                   .replace("{{data}}", dados.dataVisita())
+                   .replace("{{data}}", dataFormatada) 
                    .replace("{{horario}}", dados.horarioVisita())
                    .replace("{{tipoGrupo}}", dados.tipoGrupo())
                    .replace("{{qtd}}", String.valueOf(dados.qtdPessoas()))
                    .replace("{{mensagem}}", dados.mensagem() != null ? dados.mensagem() : "Sem observações");
 
-        // ENVIO: De Sistema -> Para Admin
-        // Reply-To: Vai para o e-mail do Solicitante
         sendEmailFinal(
             EMAIL_DESTINO_ADMIN, 
             "🌱 Nova Solicitação: " + dados.instituicao(), 
@@ -75,11 +77,13 @@ public class EmailService {
     private void enviarParaVisitante(EmailDTO dados) throws IOException {
         String html = readTemplate(TEMPLATE_CLIENTE);
         
-        // Confirma apenas o básico para o cliente
-        html = html.replace("{{nome}}", dados.nomeResponsavel())
-                   .replace("{{data}}", dados.dataVisita());
+        // Formata a data antes de colocar no HTML
+        String dataFormatada = formatarData(dados.dataVisita());
 
-        // ENVIO: De Sistema -> Para Solicitante 
+        html = html.replace("{{nome}}", dados.nomeResponsavel())
+                   .replace("{{data}}", dataFormatada) 
+                   .replace("{{horario}}", dados.horarioVisita());
+
         sendEmailFinal(
             dados.emailContato(), 
             "Recebemos sua solicitação! 🌱", 
@@ -88,16 +92,28 @@ public class EmailService {
         );
     }
 
+    // --- UTILITÁRIO DE FORMATAÇÃO  ---
+    // Se for data YYYY-MM-DD, vira DD/MM/YYYY
+    private String formatarData(String dataOriginal) {
+        try {
+            if (dataOriginal != null && !dataOriginal.isEmpty()) {
+                return LocalDate.parse(dataOriginal)
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            }
+        } catch (Exception e) {
+            System.err.println("Aviso: Data inválida para formatação, mantendo original.");
+        }
+        return dataOriginal; // Retorna a original se der erro
+    }
+
     // --- SendGrid ---
     private void sendEmailFinal(String destinatario, String assunto, String htmlContent, String replyToEmail) throws IOException {
-        // O "From" é sempre o email verificado para garantir a entrega
         Email from = new Email(EMAIL_REMETENTE_OFICIAL, "Central de Resíduos PUCRS");
         Email to = new Email(destinatario);
         Content content = new Content("text/html", htmlContent);
 
         Mail mail = new Mail(from, assunto, to, content);
         
-        // Configura o Reply-To dinamicamente
         if (replyToEmail != null && !replyToEmail.isEmpty()) {
             mail.setReplyTo(new Email(replyToEmail));
         }
@@ -117,7 +133,6 @@ public class EmailService {
         }
     }
 
-    // Leitura do arquivo
     private String readTemplate(String path) throws IOException {
         ClassPathResource resource = new ClassPathResource(path);
         return new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
