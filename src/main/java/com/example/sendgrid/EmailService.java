@@ -23,10 +23,10 @@ public class EmailService {
     private String sendGridApiKey;
 
     // QUEM ENVIA: Use o Email verificado no SendGrid 
-    private final String EMAIL_REMETENTE_OFICIAL = "augusto06r@gmail.com";
+    private final String EMAIL_REMETENTE_OFICIAL = "emailremetente@email.com";
 
     // QUEM RECEBE: Sua caixa de entrada 
-    private final String EMAIL_DESTINO_ADMIN = "augusto06r@gmail.com";
+    private final String EMAIL_DESTINO_ADMIN = "emaildestino@email.com";
 
     // Caminhos dos templates
     private final String TEMPLATE_ADMIN = "templates/email-visita.html";
